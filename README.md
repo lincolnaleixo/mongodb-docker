@@ -1,2 +1,2 @@
 # mongodb-docker
-logger server in docker
+mongodb server in docker
