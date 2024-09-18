@@ -11,7 +11,7 @@ services:
     ports:
       - "${MONGODB_PORT}:${MONGODB_PORT}"
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo admin --quiet
+      test: echo 'db.runCommand("ping").ok' | mongosh admin --quiet
       interval: 10s
       timeout: 5s
       retries: 5
