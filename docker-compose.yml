@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mongodb:
+    container_name: ${MONGODB_NAME}
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    restart: always
+    volumes:
+      - ./database/data:/data/db  # Local onde os dados serão persistidos
+    ports:
+      - "${MONGODB_PORT}:${MONGODB_PORT}"
+    networks:
+      - mongo_network
+
+networks:
+  mongo_network:
+    driver: bridge
