@@ -10,9 +10,13 @@ services:
       - ${MONGODB_VOLUME_PATH}:/data/db
     ports:
       - "${MONGODB_PORT}:${MONGODB_PORT}"
-    networks:
-      - mongo_network
-
-networks:
-  mongo_network:
-    driver: bridge
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo admin --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
